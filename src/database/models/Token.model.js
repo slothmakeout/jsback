@@ -1,20 +1,17 @@
 const Sequelize = require("sequelize");
-const { sequelize } = require("../database");
+const { sequelize } = require("..");
 const { nanoid } = require("nanoid");
 class Token extends Sequelize.Model {}
 
 Token.init(
   {
     id: {
-      type: Sequelize.UUID,
+      type: Sequelize.UUIDV4,
+      defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
-    },
-    userId: {
-      type: Sequelize.UUID,
     },
     value: {
       type: Sequelize.STRING,
-      defaultValue: nanoid(),
     },
   },
   {

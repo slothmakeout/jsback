@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const ErrorResponse = require("../classes/error-response");
 const User = require("../database/models/User.model.js");
 const { asyncHandler, requireToken } = require("../middlewares/middlewares");
 
@@ -13,16 +12,14 @@ function initRoutes() {
 
 async function getInfo(req, res, next) {
   const user = await User.findByPk(req.token.userId);
-  if (!user) {
-    throw new ErrorResponse("User not found", 400);
-  }
-  res.json({ user });
+  res.json(user);
 }
 
 async function updateInfo(req, res, next) {
   const user = await User.findByPk(req.token.userId);
   // If you want to update a specific set of fields, you can use update
   await user.update(req.body);
+  res.json(user);
 }
 
 async function logout(req, res, next) {

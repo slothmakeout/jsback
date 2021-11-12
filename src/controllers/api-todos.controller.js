@@ -96,7 +96,7 @@ async function updateToDoById(req, res, next) {
     throw new ErrorResponse("ToDo is not found by id", 404);
   }
 
-  await todo.update(req.body);//set+save
+  await todo.update(req.body);
 
   res.json(todo);
 }

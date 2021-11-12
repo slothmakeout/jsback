@@ -30,16 +30,16 @@ const errorHandler = (e, request, res, _) => {
 
 const requireToken = async (req, res, next) => {
   const accessToken = req.get("x-access-token");
-  if (!token) {
-    throw Error("Token wasn't sent", 401);
+  if (!accessToken) {
+    throw new ErrorResponse("Token wasn't sent", 400);
   }
   const tokenFromDB = await Token.findOne({
     where: {
       value: accessToken,
     },
   });
-  if (!tokenfromDB) {
-    throw Error("Wrong token", 400);
+  if (!tokenFromDB) {
+    throw new ErrorResponse("Wrong token", 401);
   }
   req.token = tokenFromDB;
 
