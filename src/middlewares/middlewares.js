@@ -42,7 +42,7 @@ const requireToken = async (req, res, next) => {
     throw new ErrorResponse("Wrong token", 401);
   }
   req.token = tokenFromDB;
-
+  
   next();
 };
 

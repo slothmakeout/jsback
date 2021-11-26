@@ -1,14 +1,16 @@
 const express = require("express");
 const http = require("http");
-const cors = require('cors');
+const cors = require("cors");
 const { initDB } = require("./database");
 const apiTodosRouter = require("./controllers/api-todos.controller");
 const apiAuthRouter = require("./controllers/api-auth.controller");
 const apiUsersRouter = require("./controllers/api-users.controller");
-const { notFound, errorHandler} = require('./middlewares/middlewares');
+const { notFound, errorHandler } = require("./middlewares/middlewares");
 const app = express();
 
 initDB();
+
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log("URL = ", req.url);
